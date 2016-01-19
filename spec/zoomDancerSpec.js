@@ -20,11 +20,11 @@ describe("zoomDancer", function() {
   });
 
   it("should have a step function that makes the size fluctuate", function() {
-    sinon.spy(zoomDancer.$node, 'width');
-    sinon.spy(zoomDancer.$node, 'height');
+    sinon.spy(zoomDancer.$node, 'animate');
+    
     zoomDancer.step();
-    expect(zoomDancer.$node.width.called).to.be.true;
-    expect(zoomDancer.$node.height.called).to.be.true;
+    expect(zoomDancer.$node.animate.called).to.be.true;
+    
 
   });
 
@@ -32,7 +32,7 @@ describe("zoomDancer", function() {
     it("should call step at least once per second", function(){
       sinon.spy(zoomDancer, "step");
       expect(zoomDancer.step.callCount).to.be.equal(0);
-      //clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
+      clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
       clock.tick(timeBetweenSteps);
 
       expect(zoomDancer.step.callCount).to.be.equal(1);
