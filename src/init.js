@@ -32,4 +32,61 @@ $(document).ready(function(){
     $('body').append(dancer.$node);
   });
 
+  $(".lineUpButton").on("click", function(event){
+    var prevTop=$('body').height()-50;
+    var prevLeft=0;
+    for (var i = 0; i < window.dancers.length; i++) {
+      var dancer = window.dancers[i];
+      
+      var result=dancer.lineup(20,prevTop,prevLeft)
+      prevTop=result[0];
+      prevLeft=result[1];
+    } 
+  
+
+  });
+  $('body').mouseover(function(event){
+    var $target = $(event.target);
+    if($target.hasClass('dancer')){
+    
+      var targetTop = $target.css('top');
+      targetTop = parseInt(targetTop.substring(0, targetTop.length - 2));
+      var targetLeft=$target.css('left');
+      targetLeft = parseInt(targetLeft.substring(0, targetLeft.length -2));
+      var closestDancerTop;
+      var closestDancerLeft;
+      var closestDistance;
+      for(var i=0;i<window.dancers.length;i++){
+        var dancer=window.dancers[i];
+        var dancerTop=dancer.$node.css('top');
+        dancerTop = parseInt(dancerTop.substring(0, dancerTop.length - 2));
+        var dancerLeft=dancer.$node.css('left');
+        dancerLeft = parseInt(dancerLeft.substring(0, dancerLeft.length - 2));
+        if (dancerTop === targetTop && dancerLeft === targetLeft) {
+          continue;
+        }
+
+        var distance= Math.sqrt(Math.pow(Math.abs(targetTop-dancerTop),2)+Math.pow(Math.abs(targetLeft-dancerLeft),2));
+        if(!closestDistance){
+          closestDancerTop=dancerTop;
+          closestDancerLeft=dancerLeft;
+          closestDistance=distance
+        }
+        else{
+          if(distance<closestDistance){
+            closestDistance=distance;
+            closestDancerTop=dancerTop;
+            closestDancerLeft=dancerLeft;
+          }
+
+        }   
+     }
+     $target.css({
+      top: closestDancerTop + 20, 
+      left: closestDancerLeft + 20
+    });
+   }
+  });
+  
+
 });
