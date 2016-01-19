@@ -24,13 +24,23 @@ body, a:link, a:visited, a:active{
   border:10px solid red;
   border-radius:10px;
   position:absolute;
-  
+}
+
+.color-dancer {
+  border-radius: 0px;
+}
+
+.blinky-dancer {
+  background-image: url('src/images/volcano.jpg');
+  width : 50px;
+  height: 50px;
 }
 
 .zoom-dancer {
   -webkit-animation:spin 4s linear infinite;
   -moz-animation:spin 4s linear infinite;
   animation:spin 4s linear infinite;
+  border: 10px solid blue;
 }
   @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
   @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }

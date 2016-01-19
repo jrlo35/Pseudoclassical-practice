@@ -3,7 +3,7 @@ ColorDancer = function(top, left, timeBetweenSteps) {
   this.colors = ["#33cc33", "#0000ff", "#ff99ff", 
                   "#996633", "#33cccc", "#6600cc"]; 
   Dancer.call(this, top, left, timeBetweenSteps);
-  
+  this.$node.addClass('color-dancer');
 
 }
 
